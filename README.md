@@ -1,6 +1,7 @@
 # BloodBank
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.7.
+This project was generated with Angular CLI version 10.0.7.
+This project is a fronted projet for a blood projet in hospitol in algeria in order to help employees to manage the quantity of blood available to be distribute to the patients who need it.
 
 ## Development server
 
