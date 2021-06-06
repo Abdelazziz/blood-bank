@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-image: url('./assets/img/background-blood.png');
+    background-repeat: no-repeat;
+    background-color: #f4f7ff;
+    margin: 0;
+}
+html, body { height: 100%; }
+.form-control:focus , .custom-select:focus {
+    border-color: #454d55;
+    box-shadow: inset 0 1px 1px rgba(231, 225, 225, 0.075), 0 0 8px #454d55;
+  }

@@ -1,0 +1,80 @@
+<div class="container-fluid">
+
+  <form bg-light>
+    <div class="row pt-2">
+        <label for="nserie" class="col-6 col-md-2 col-form-label text-right mb-2 mb-md-0"> Nom </label>
+        <div class="col-6 col-md-2 pt-2 pt-md-0">
+            <input name="name" [(ngModel)]="name" type="text" class="form-control form-control-sm w-auto"
+                id="nserie" placeholder="Nom">
+        </div>
+
+        <label for="produitlabile" class="col-6 col-md-2 col-form-label text-right"> Prénom </label>
+        <div class="col-6 col-md-2">
+            <input name="pname" [(ngModel)]="pname" type="text" class="form-control form-control-sm w-auto"
+                id="produitlabile" placeholder="Prénom">
+        </div>
+
+        <label for="SelectGroup" class="col-6 col-md-2 col-form-label text-right"> Groupage </label>
+        <div class="col-6 col-md-2">
+            <select name="selectedObject" class="custom-select custom-select-sm" id="SelectGroup"
+                [(ngModel)]="selectedObject">
+                <option *ngFor="let selectOptions of selectOption; let k = index" [value]="selectOptions.val"
+                    [disabled]="k==0?true:false">
+                    {{selectOptions.lab}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="row pt-md-2 pb-md-2">
+        <label for="nserie" class="col-6 col-md-2 col-form-label text-right"> Email </label>
+        <div class="col-6 col-md-2">
+            <input name="email" [(ngModel)]="email" type="text" class="form-control form-control-sm w-auto"
+                id="nserie" placeholder="Email">
+        </div>
+
+        <label for="produitlabile1" class="col-6 col-md-2 col-form-label text-right"> Ville </label>
+        <div class="col-6 col-md-2">
+            <input name="ville" [(ngModel)]="ville" type="text" class="form-control form-control-sm w-auto"
+                id="produitlabile1" placeholder="Ville">
+        </div>
+    </div>
+
+</form>
+
+  <div class="row">
+    <div class="col-12">
+        <table mat-table [dataSource]="dataSource" class="full-width-table">
+
+          <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th class="thead-dark" mat-header-cell *matHeaderCellDef> # </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef> Weight </th>
+            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="symbol">
+            <th mat-header-cell *matHeaderCellDef> Symbol </th>
+            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+  </div>
+</div>

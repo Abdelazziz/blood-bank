@@ -1,0 +1,133 @@
+<div class="container-fluid">
+    <form bg-light>
+        <div class="row pt-2">
+            <label for="nserie" class="col-6 col-md-2 col-form-label text-right mb-2 mb-md-0"> N° Série </label>
+            <div class="col-6 col-md-2 pt-2 pt-md-0">
+                <input name="nSerie" [(ngModel)]="nSerie" type="text" class="form-control form-control-sm w-auto"
+                    id="nserie" placeholder="N° Série">
+            </div>
+
+            <label for="SelectGroup" class="col-6 col-md-2 col-form-label text-right"> Groupage </label>
+            <div class="col-6 col-md-2">
+                <select name="selectedObject" class="custom-select custom-select-sm" id="SelectGroup"
+                    [(ngModel)]="selectedObject">
+                    <option *ngFor="let selectOptions of selectOption; let k = index" [value]="selectOptions.val"
+                        [disabled]="k==0?true:false">
+                        {{selectOptions.lab}}
+                    </option>
+                </select>
+            </div>
+
+            <label class="col-6 col-md-2 col-form-label text-right"> Sérologie </label>
+            <div class="col-6 col-md-2">
+                <select name="selecteSerelogie" class="custom-select custom-select-sm" id="SelectGroup"
+                    [(ngModel)]="selecteSerelogie">
+                    <option *ngFor="let selectOptionSerelogies of selectOptionSerelogie; let k = index" [value]="selectOptionSerelogies.val"
+                        [disabled]="k==0?true:false">
+                        {{selectOptionSerelogies.lab}}
+                    </option>
+                </select>
+            </div>
+            
+        </div>
+        <div class="row pt-md-2 pb-md-2">
+            <label class="col-6 col-md-2 col-form-label text-right"> Date Prélevement >= </label>
+            <div class="col-6 col-md-2">
+                <input name="dateprelev" [(ngModel)]="dateprelev"
+                type="date" class="form-control form-control-sm" value="1996-12-19">
+            </div>
+
+            <label for="produitlabile1" class="col-6 col-md-2 col-form-label text-right"> Date Prélevement <= </label>
+            <div class="col-6 col-md-2">
+                <input name="ville" [(ngModel)]="ville" type="date" class="form-control form-control-sm w-auto"
+                    id="produitlabile1" placeholder="Ville">
+            </div>
+        </div>
+
+    </form>
+
+    <div class="row">
+        <div class="table-responsive border-bottom mb-2">
+            <table class="border-dark" mdbTable #tableEl="mdbTable" bordered="true" hover="true" small="true">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            <a><span class="ml-2">#</span></a>
+                        </th>
+                        <th [mdbTableSort]="listproduct" sortBy="nSerie">
+                            <a class="fa fa-sort"><span class="ml-2">N° serie</span></a>
+                        </th>
+                        <th [mdbTableSort]="listproduct" sortBy="dateprelev">
+                            <a class="fa fa-sort"><span class="ml-2">Date prélevement</span></a>
+                        </th>
+                        <th [mdbTableSort]="listproduct" sortBy="dateExp">
+                            <a class="fa fa-sort"><span class="ml-2">Date Expiration</span></a>
+                        </th>
+                        <th [mdbTableSort]="listproduct" sortBy="bloodgroup">
+                            <a class="fa fa-sort"><span class="ml-2">Groupage</span></a>
+                        </th>
+                        <th [mdbTableSort]="listproduct" sortBy="volume">
+                            <a class="fa fa-sort"><span class="ml-2">Volume</span></a>
+                        </th>
+                        <th [mdbTableSort]="listproduct" sortBy="serologie">
+                            <a class="fa fa-sort"><span class="ml-2">Sérologie</span></a>
+                        </th>
+                        <th [mdbTableSort]="listproduct" sortBy="bloodstatus">
+                            <a class="fa fa-sort"><span class="ml-2">Etat Qualification</span></a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let listproducts of listproduct;let i = index;">
+                        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                            scope="row">{{i+1}}</th>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                            {{listproducts.nSerie}}</td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                            {{listproducts.dateprelev | date:'dd/MM/yyyy'}}</td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                            {{listproducts.dateExp | date:'dd/MM/yyyy'}}</td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                            {{listproducts.bloodgroup}}</td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                            {{listproducts.volume}}</td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                            {{listproducts.serologie}} </td>
+                        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                            {{listproducts.bloodstatus}} </td>
+                    </tr>
+                    <tr *ngIf="!listproduct.length">
+                        <td colspan="20" class="text-center"> {{noResult}} </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="m-0 p-0">
+                        <td colspan="20" class="pb-0 m-0">
+                            <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="listproduct">
+                            </mdb-table-pagination>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="row border-bottom pb-2">
+        <div class="col-1 text-left pl-0">
+            <button (click)="search()" class="btn btn-dark btn-sm">
+                <span class="fa fa-search fa-lg"></span>
+            </button>
+        </div>
+        <div class="col-1 text-right pr-0">
+            <button (click)="reset()" class="btn btn-dark btn-sm">
+                <span class="fa fa-undo fa-lg"></span>
+            </button>
+        </div>
+        <div class="col-1 text-right offset-8 offset-md-9 pr-0">
+            <button (click)="exportxsl()" class="btn btn-dark btn-sm" [disabled]="!listproduct.length">
+                <span class="fa fa-file-excel-o fa-lg"> </span>
+            </button>
+        </div>
+    </div>
+
+</div>

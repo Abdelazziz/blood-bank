@@ -1,0 +1,91 @@
+<header class="headershadaw">
+  <div class="container-fluid">
+    <div class="row pt-2 pb-2">
+      <div class="col-4 col-md-2">
+        <a class="navbar-brand pstock">
+          <img src="./../../assets/img/header-logo.png" alt="itbridge">
+        </a>
+      </div>
+      <div class="col-4 col-md-auto order-1">
+        <button type="button" 
+        class="btn btn-dark btn-md text-white" (click)="logout()">Déconnexion</button>
+      </div>
+      <div class="col-4 col-md-auto ml-md-auto align-self-center p-0">
+        <span>Bonjour {{ userinfo.id | uppercase }} !!</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<aside class="container-fluid mt-2">
+  <div class="row">
+    <div class="col-12 col-md-2">
+      <div class="accordion" id="accordionExample">
+        <div class="card bg-transparent">
+          <div class="card-header pt-2 pb-0" id="headingTwo">
+            <h2 class="mb-0">
+              <a data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Distribution
+                <i class="fa fa-chevron-down toggle rotate"></i>
+              </a>
+            </h2>
+          </div>
+          <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+              <ul class="list-group text-left">
+                <li class="list-group-item animate__animated py-1 pl-2 pstock" [class.activeBlood]="arraylinkIsClicked[0]"
+                  (click)="switchComp(0)"> Produits en Stock </li>
+                <li class="list-group-item animate__animated py-1 mt-1 pl-2 pstock" [class.activeBlood]="arraylinkIsClicked[1]"
+                  (click)="switchComp(1)"> Transaction Distribution </li>
+                <li class="list-group-item animate__animated py-1 mt-1 pl-2 pstock" [class.activeBlood]="arraylinkIsClicked[2]"
+                (click)="switchComp(2)"> Liste Des Malades </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion pt-1" id="accordionExample2">
+        <div class="card bg-transparent">
+          <div class="card-header pt-2 pb-0" id="headingTh">
+            <h2 class="mb-0">
+              <a data-toggle="collapse" data-target="#collapseTh" aria-expanded="false" aria-controls="collapseTh">
+                <span>
+                  Réception Stock</span>
+                <i class="fa fa-chevron-down toggle rotate"></i>
+              </a>
+            </h2>
+          </div>
+          <div id="collapseTh" class="collapse show" aria-labelledby="headingTh" data-parent="#accordionExample2">
+            <div class="card-body">
+              <ul class="list-group text-left">
+                <li class="list-group-item animate__animated py-1 pl-1 pstock" [class.activeBlood]="arraylinkIsClicked[3]"
+                (click)="switchComp(3)"> Transaction Entrer Stock </li>
+                <li class="list-group-item animate__animated py-1 mt-1 pl-1 pstock" [class.activeBlood]="arraylinkIsClicked[4]"
+                (click)="switchComp(4)"> Liste Des Donneurs </li>
+                <li class="list-group-item animate__animated py-1 mt-1 pl-1 pstock" [class.activeBlood]="arraylinkIsClicked[5]"
+                (click)="switchComp(5)"> Produits PSL Disponible </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <main class="col-12 col-md-10 border-top">
+      <app-productonstock *ngIf="arraylinkIsClicked[0]" [noResult]="noResult"></app-productonstock>
+      <app-dis-transaction *ngIf="arraylinkIsClicked[1]" [noResult]="noResult"></app-dis-transaction>
+      <app-malades *ngIf="arraylinkIsClicked[2]"></app-malades>
+    </main>
+
+  </div>
+</aside>
+
+<footer class="footer-blood">
+  <div class="container">
+    <span class="text muted">
+      &copy; Copyright 2020 <a class="text-dark" href="http://www.itbridge.dz">ITBridge</a>
+    </span>
+  </div>
+</footer>
