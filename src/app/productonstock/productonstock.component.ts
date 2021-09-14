@@ -33,7 +33,7 @@ export class ProductonstockComponent implements OnInit, AfterViewInit {
   selectOptionSerelogie: any[];
 
   constructor(private exportxls: ExportExcelService,
-              private cdRef: ChangeDetectorRef, private stockslistService: StockslistService) {
+    private cdRef: ChangeDetectorRef, private stockslistService: StockslistService) {
 
   }
 
@@ -45,15 +45,17 @@ export class ProductonstockComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.stockslistService.sendGetRequest().subscribe((data: any[]) => {
-      this.listproduct = data;
-      this.mdbTable.setDataSource(this.listproduct);
-      this.listproduct = this.mdbTable.getDataSource();
-      this.previous = this.mdbTable.getDataSource();
-      this.listproductAll = this.listproduct;
-    },
-    err => {
-      Swal.fire('Erreur', 'Atention Vérifier votre serveur!', 'error');
+    this.stockslistService.sendGetRequest().subscribe({
+      next: (data: any[]) => {
+        this.listproduct = data;
+        this.mdbTable.setDataSource(this.listproduct);
+        this.listproduct = this.mdbTable.getDataSource();
+        this.previous = this.mdbTable.getDataSource();
+        this.listproductAll = this.listproduct;
+      },
+      error: (err) => {
+        Swal.fire('Erreur', 'Atention Vérifier votre serveur!'+err.msg, 'error');
+      }
     });
     this.selectOption =
       [{ val: 'D', lab: 'Choisir Groupage' }, { val: 'O+', lab: 'O+' },
@@ -61,7 +63,7 @@ export class ProductonstockComponent implements OnInit, AfterViewInit {
       { val: 'B+', lab: 'B+' }, { val: 'B-', lab: 'B Neg' }, { val: 'AB+', lab: 'AB+' },
       { val: 'AB-', lab: 'AB Neg' }];
     this.selectOptionSerelogie = [
-      {val: 'N', lab: 'Choisir Sero'}, {val: '0', lab: 'Non Faite'}, {val: '1', lab: 'Negatif'}
+      { val: 'N', lab: 'Choisir Sero' }, { val: '0', lab: 'Non Faite' }, { val: '1', lab: 'Negatif' }
     ];
     this.reset();
   }
